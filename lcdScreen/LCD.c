@@ -44,12 +44,12 @@ void Lcd_init() {
     GPIOPinWrite(LCD_PORT, E, 0x00);
     SysCtlDelay(50000);
 
-    Lcd_Temizle();
-    Lcd_Putch(0x28,0);//fonksiyon secimi
-    Lcd_Putch(0x06,0);//kursörü saða kaydýr
-    Lcd_Putch(0x80,0);//kursör konumu
-    Lcd_Putch(0x0f,0);//kursörü aç
-    Lcd_Temizle();
+    LCD_Commands();
+    Lcd_Putch(0x28,0);
+    Lcd_Putch(0x06,0);
+    Lcd_Putch(0x80,0);
+    Lcd_Putch(0x0f,0);
+    LCD_Commands();
 }
 
 void Lcd_Goto(char x, char y){
@@ -59,7 +59,7 @@ void Lcd_Goto(char x, char y){
         Lcd_Putch(0xC0+((y-1)%16),0);
 }
 
-void Lcd_Temizle(void){
+void LCD_Commands(void){
     Lcd_Putch(0x01,0);
     SysCtlDelay(10);
 }
@@ -69,7 +69,6 @@ void Lcd_Puts( char* s){
         Lcd_Putch(*s++,1);
 }
 
-//komut ise 0 , karakter ise 1
 void Lcd_Putch(unsigned char c,int type) {
     GPIOPinWrite(LCD_PORT, D4 | D5 | D6 | D7, (c & 0xf0) );
     if(type==1)GPIOPinWrite(LCD_PORT, RS, 0x01);

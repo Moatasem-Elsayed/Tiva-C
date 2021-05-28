@@ -15,7 +15,7 @@
 #define D6                               GPIO_PIN_6
 #define D7                               GPIO_PIN_7
 
-void Lcd_Temizle(void);
+void LCD_Commands(void);
 void Lcd_Puts(char*);
 void Lcd_Goto(char,char);
 void Lcd_init(void);
